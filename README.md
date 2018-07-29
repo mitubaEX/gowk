@@ -13,7 +13,7 @@ go get github.com/mitubaEX/gowk
 
 ```
 ❯❯❯ echo "1,2,3\n2,3,4" | go run main.go sum
-3,
+3
 ❯❯❯ echo "1,2,3\n2,3,4" | go run main.go sum -c 1,2
-5,7,
+5,7
 ```
