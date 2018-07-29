@@ -1,6 +1,6 @@
 package command
 
 type Command interface {
-	Perform(targetIndex, targetVal int)
+	Perform(targetIndex int, targetVal string)
 	Print()
 }

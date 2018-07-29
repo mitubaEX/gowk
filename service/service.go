@@ -16,9 +16,9 @@ func Perform(com command.Command, options *utils.Options) {
 
 		for _, v := range options.Column {
 			targetIndex := utils.StringToInt(v)
-			targetVal := utils.StringToInt(line[targetIndex])
+			//targetVal := utils.StringToInt(line[targetIndex])
 
-			com.Perform(targetIndex, targetVal)
+			com.Perform(targetIndex, line[targetIndex])
 		}
 	}
 	com.Print()

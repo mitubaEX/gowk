@@ -1,6 +1,9 @@
 package command
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/mitubaEX/gowk/utils"
+)
 
 type Sum struct {
 	resultMap map[int]int
@@ -11,12 +14,13 @@ func NewSum() *Sum {
 }
 
 
-func (sum *Sum) Perform(targetIndex, targetVal int) {
+func (sum *Sum) Perform(targetIndex int, targetVal string) {
 	// sum
+	targetValToInt := utils.StringToInt(targetVal)
 	if val, ok := sum.resultMap[targetIndex]; ok {
-		sum.resultMap[targetIndex] = val + targetVal
+		sum.resultMap[targetIndex] = val + targetValToInt
 	} else {
-		sum.resultMap[targetIndex] = targetVal
+		sum.resultMap[targetIndex] = targetValToInt
 	}
 }
 
