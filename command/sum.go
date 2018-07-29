@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"github.com/mitubaEX/gowk/utils"
+	"strings"
 )
 
 type Sum struct {
@@ -26,8 +27,9 @@ func (sum *Sum) Perform(targetIndex int, targetVal string) {
 
 func (sum *Sum) Print() {
 	// output
+	var printSlice []string
 	for _, v := range sum.resultMap {
-		fmt.Printf("%d%s", v, ",")
+		printSlice = append(printSlice, utils.IntToString(v))
 	}
-	fmt.Println()
+	fmt.Println(strings.Join(printSlice, ","))
 }

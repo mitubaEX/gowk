@@ -9,3 +9,8 @@ func StringToInt(str string) int{
 	}
 	return val
 }
+
+func IntToString(num int) string {
+	val := strconv.Itoa(num)
+	return val
+}
