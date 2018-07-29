@@ -4,14 +4,22 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"github.com/mitubaEX/gowk/utils"
+	"github.com/mitubaEX/gowk/service"
+	"github.com/mitubaEX/gowk/command"
 )
+
+func help() {
+	flag.Usage()
+	os.Exit(2)
+}
 
 func main() {
 
 	fs := flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 	var (
-		opt1 = fs.String("opt1", "default-value", "First string option")
-		opt2 = fs.String("opt2", "default-value", "Second string option")
+		c = fs.String("c", "0", "target column number")
+		d = fs.String("d", ",", "delimiter for line")
 	)
 
 	// -hオプション用文言
@@ -24,20 +32,23 @@ Options
 	}
 
 	if len(os.Args) <= 1 || os.Args[1] == "-h" {
-		flag.Usage()
-		os.Exit(2)
+		help()
 	}
 
 	arg1 := os.Args[1]
+
+	fs.Parse(os.Args[2:])
+	//fmt.Println("arg1:", arg1)
+	//fmt.Println("opt1:", *c)
+	//fmt.Println("opt2:", *d)
+	//fmt.Println("args:", fs.Args())
+
+	opt := utils.NewOptions(*c, *d)
+
 	switch arg1 {
 	case "sum":
-		fmt.Println("sum")
+		service.Perform(command.NewSum(), opt)
+	default:
+		help()
 	}
-
-	// flag.Parse()
-	fs.Parse(os.Args[2:])
-	fmt.Println("arg1:", arg1)
-	fmt.Println("opt1:", *opt1)
-	fmt.Println("opt2:", *opt2)
-	fmt.Println("args:", fs.Args())
 }
