@@ -9,6 +9,21 @@ go get github.com/mitubaEX/gowk
 
 ## Usage
 
+### help
+
+```
+❯❯❯ ./gowk -h
+
+Usage: ./gowk <command> [<options>] <file>...
+Options
+  -c string
+        target column number
+  -d string
+        delimiter for line (default ",")
+  -f string
+        function of filter condition (default "> 0")
+```
+
 ### Sum
 
 ```
