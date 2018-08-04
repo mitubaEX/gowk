@@ -61,3 +61,12 @@ world
 hello: 1
 world: 1
 ```
+
+### min, max
+
+```
+❯❯❯ echo "1,2,hello,3\n2,3,world,4" | go run main.go max -c 3
+4
+❯❯❯ echo "1,2,hello,3\n2,3,world,4" | go run main.go min -c 3
+3
+```
