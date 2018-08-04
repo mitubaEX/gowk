@@ -51,6 +51,8 @@ Options
 		service.Perform(command.NewFrequency(opt), opt)
 	case "max":
 		service.Perform(command.NewMax(opt), opt)
+	case "min":
+		service.Perform(command.NewMin(opt), opt)
 	default:
 		help()
 	}
