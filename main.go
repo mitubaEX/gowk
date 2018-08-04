@@ -47,6 +47,8 @@ Options
 		service.Perform(command.NewSum(opt), opt)
 	case "filter":
 		service.Perform(command.NewFilter(opt), opt)
+	case "frequency":
+		service.Perform(command.NewFrequency(opt), opt)
 	default:
 		help()
 	}

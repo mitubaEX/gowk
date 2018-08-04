@@ -1,2 +1,6 @@
 *
-!*.go
+!**/*.go
+!command
+!service
+!utils
+!README.md
