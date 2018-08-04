@@ -20,6 +20,7 @@ func main() {
 	var (
 		c = fs.String("c", "0", "target column number")
 		d = fs.String("d", ",", "delimiter for line")
+		f = fs.String("f", "> 0", "function of filter condition")
 	)
 
 	// -hオプション用文言
@@ -38,16 +39,14 @@ Options
 	arg1 := os.Args[1]
 
 	fs.Parse(os.Args[2:])
-	//fmt.Println("arg1:", arg1)
-	//fmt.Println("opt1:", *c)
-	//fmt.Println("opt2:", *d)
-	//fmt.Println("args:", fs.Args())
 
-	opt := utils.NewOptions(*c, *d)
+	opt := utils.NewOptions(*c, *d, *f)
 
 	switch arg1 {
 	case "sum":
-		service.Perform(command.NewSum(), opt)
+		service.Perform(command.NewSum(opt), opt)
+	case "filter":
+		service.Perform(command.NewFilter(opt), opt)
 	default:
 		help()
 	}

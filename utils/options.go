@@ -1,13 +1,25 @@
 package utils
 
-import "strings"
+import (
+	"strings"
+	"sort"
+)
 
 type Options struct {
-	Column []string
+	Column []int
 	Delimiter string
+	Conditions string
 }
 
-func NewOptions (column string, delimiter string) *Options {
+func NewOptions (column string, delimiter string, conditions string) *Options {
+	var columnSlice []int
+
 	targetColumn := strings.Split(column, ",")
-	return &Options{targetColumn, delimiter}
+
+	for _, v := range targetColumn {
+		val := StringToInt(v)
+		columnSlice = append(columnSlice, val)
+	}
+	sort.Ints(columnSlice)
+	return &Options{columnSlice, delimiter, conditions}
 }

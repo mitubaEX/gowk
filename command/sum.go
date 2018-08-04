@@ -4,28 +4,27 @@ import (
 	"fmt"
 	"github.com/mitubaEX/gowk/utils"
 	"strings"
-	"sort"
 )
 
 type Sum struct {
 	floatMap map[int]float64
 	strMap map[int]string
-	indexMap map[int]int
+	options *utils.Options
 }
 
-func NewSum() *Sum {
-	return &Sum{map[int]float64{}, map[int]string{}, map[int]int{}}
+func NewSum(options *utils.Options) *Sum {
+	return &Sum{map[int]float64{}, map[int]string{}, options}
 }
 
 
 func (sum *Sum) Perform(targetIndex int, targetVal string) {
-	sum.indexMap[targetIndex] += 1
 	// sum
 	if utils.IsFloat(targetVal) {
 		targetValToFloat, err := utils.StringToFloat(targetVal)
 		if err != nil {
 			panic(err)
 		}
+
 		if val, ok := sum.floatMap[targetIndex]; ok {
 			sum.floatMap[targetIndex] = val + targetValToFloat
 		} else {
@@ -41,15 +40,9 @@ func (sum *Sum) Perform(targetIndex int, targetVal string) {
 }
 
 func (sum *Sum) Print() {
-	var keys []int
-	for k := range sum.indexMap {
-		keys = append(keys, k)
-	}
-	sort.Ints(keys)
-
 	// output
 	var printSlice []string
-	for _, k := range keys {
+	for _, k := range sum.options.Column {
 		if _, ok := sum.floatMap[k] ; ok {
 			printSlice = append(printSlice, utils.FloatToString(sum.floatMap[k]))
 		}
