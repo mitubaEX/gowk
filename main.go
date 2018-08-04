@@ -49,6 +49,8 @@ Options
 		service.Perform(command.NewFilter(opt), opt)
 	case "frequency":
 		service.Perform(command.NewFrequency(opt), opt)
+	case "max":
+		service.Perform(command.NewMax(opt), opt)
 	default:
 		help()
 	}
