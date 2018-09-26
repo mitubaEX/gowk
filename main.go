@@ -20,15 +20,24 @@ func main() {
 	var (
 		c = fs.String("c", "0", "target column number")
 		d = fs.String("d", ",", "delimiter for line")
-		f = fs.String("f", "> 0", "function of filter condition")
+		f = fs.String("f", "> 0", "function of filter condition {required at filter mode}")
 	)
 
 	// -hオプション用文言
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, `
-Usage: %s <command> [<options>] <file>...
-Options
-`, os.Args[0])
+Usage: %s <command> [<options>] <file>...`, os.Args[0])
+		fmt.Fprintf(os.Stderr, `
+Commands:
+	sum 
+	filter
+	frequency 
+	min
+	max
+`)
+		fmt.Fprintf(os.Stderr, `
+Options:
+`)
 		fs.PrintDefaults()
 	}
 
