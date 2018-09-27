@@ -1,16 +1,16 @@
 package command
 
 import (
-	"go/types"
-	"go/token"
+	"fmt"
 	"github.com/mitubaEX/gowk/utils"
 	"go/constant"
-	"fmt"
+	"go/token"
+	"go/types"
 	"strings"
 )
 
 type Filter struct {
-	strMap map[int][]string
+	strMap  map[int][]string
 	options *utils.Options
 }
 

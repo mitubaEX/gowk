@@ -1,11 +1,11 @@
 package utils
 
 import (
-	"strconv"
 	"fmt"
+	"strconv"
 )
 
-func StringToInt(str string) int{
+func StringToInt(str string) int {
 	val, err := strconv.Atoi(str)
 	if err != nil {
 		panic(err)
@@ -18,7 +18,7 @@ func IntToString(num int) string {
 	return val
 }
 
-func StringToFloat(str string) (float64, error){
+func StringToFloat(str string) (float64, error) {
 	val, err := strconv.ParseFloat(str, 64)
 	return val, err
 }

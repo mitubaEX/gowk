@@ -1,15 +1,15 @@
 package command
 
 import (
+	"errors"
+	"fmt"
 	"github.com/mitubaEX/gowk/utils"
 	"math"
-	"fmt"
 	"strings"
-	"errors"
 )
 
 type Max struct {
-	maxMap map[int]float64
+	maxMap  map[int]float64
 	options *utils.Options
 }
 
@@ -38,7 +38,7 @@ func (max *Max) Perform(targetIndex int, targetVal string) error {
 func (max *Max) Print() {
 	var printSlice []string
 	for _, k := range max.options.Column {
-		if _, ok := max.maxMap[k] ; ok {
+		if _, ok := max.maxMap[k]; ok {
 			printSlice = append(printSlice, utils.FloatToString(max.maxMap[k]))
 		}
 	}

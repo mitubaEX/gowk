@@ -1,6 +1,6 @@
 package command
 
 type Command interface {
-	Perform(targetIndex int, targetVal string) error
+	Perform(int, string) error
 	Print()
 }

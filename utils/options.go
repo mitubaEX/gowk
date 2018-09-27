@@ -1,17 +1,17 @@
 package utils
 
 import (
-	"strings"
 	"sort"
+	"strings"
 )
 
 type Options struct {
-	Column []int
-	Delimiter string
+	Column     []int
+	Delimiter  string
 	Conditions string
 }
 
-func NewOptions (column string, delimiter string, conditions string) *Options {
+func NewOptions(column string, delimiter string, conditions string) *Options {
 	var columnSlice []int
 
 	targetColumn := strings.Split(column, ",")

@@ -1,12 +1,12 @@
 package command
 
 import (
-	"github.com/mitubaEX/gowk/utils"
 	"fmt"
+	"github.com/mitubaEX/gowk/utils"
 )
 
 type Frequency struct {
-	strMap map[int]map[string]int
+	strMap  map[int]map[string]int
 	options *utils.Options
 }
 
