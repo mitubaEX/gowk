@@ -17,12 +17,12 @@ func NewSum(options *utils.Options) *Sum {
 }
 
 
-func (sum *Sum) Perform(targetIndex int, targetVal string) {
-	// sum
+func (sum *Sum) Perform(targetIndex int, targetVal string) error {
+	// float val condition
 	if utils.IsFloat(targetVal) {
 		targetValToFloat, err := utils.StringToFloat(targetVal)
 		if err != nil {
-			panic(err)
+			return err
 		}
 
 		if val, ok := sum.floatMap[targetIndex]; ok {
@@ -30,13 +30,16 @@ func (sum *Sum) Perform(targetIndex int, targetVal string) {
 		} else {
 			sum.floatMap[targetIndex] = targetValToFloat
 		}
-	} else {
-		if val, ok := sum.strMap[targetIndex]; ok {
-			sum.strMap[targetIndex] = val + targetVal
-		} else {
-			sum.strMap[targetIndex] = targetVal
-		}
+		return nil
 	}
+
+	// string val condition
+	if val, ok := sum.strMap[targetIndex]; ok {
+		sum.strMap[targetIndex] = val + targetVal
+	} else {
+		sum.strMap[targetIndex] = targetVal
+	}
+	return nil
 }
 
 func (sum *Sum) Print() {

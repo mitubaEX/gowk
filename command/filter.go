@@ -22,11 +22,12 @@ func eval(expr string) (types.TypeAndValue, error) {
 	return types.Eval(token.NewFileSet(), types.NewPackage("main", "main"), token.NoPos, expr)
 }
 
-func (filter *Filter) Perform(targetIndex int, targetVal string) {
+func (filter *Filter) Perform(targetIndex int, targetVal string) error {
+	// float val condition
 	if utils.IsFloat(targetVal) {
 		v, err := eval(targetVal + filter.options.Conditions)
 		if err != nil {
-			panic(err)
+			return err
 		}
 
 		if constant.BoolVal(v.Value) {
@@ -37,20 +38,23 @@ func (filter *Filter) Perform(targetIndex int, targetVal string) {
 				filter.strMap[targetIndex] = []string{targetVal}
 			}
 		}
-	} else {
-		v, err := eval(`"` + targetVal + `"` + filter.options.Conditions)
-		if err != nil {
-			panic(err)
-		}
-		if constant.BoolVal(v.Value) {
-			if val, ok := filter.strMap[targetIndex]; ok {
-				val = append(val, targetVal)
-				filter.strMap[targetIndex] = val
-			} else {
-				filter.strMap[targetIndex] = []string{targetVal}
-			}
+		return nil
+	}
+
+	// string val condition
+	v, err := eval(`"` + targetVal + `"` + filter.options.Conditions)
+	if err != nil {
+		return err
+	}
+	if constant.BoolVal(v.Value) {
+		if val, ok := filter.strMap[targetIndex]; ok {
+			val = append(val, targetVal)
+			filter.strMap[targetIndex] = val
+		} else {
+			filter.strMap[targetIndex] = []string{targetVal}
 		}
 	}
+	return nil
 }
 
 func (filter *Filter) Print() {

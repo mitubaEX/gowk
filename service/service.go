@@ -1,11 +1,13 @@
 package service
 
 import (
-	"github.com/mitubaEX/gowk/command"
-	"github.com/mitubaEX/gowk/utils"
 	"bufio"
+	"log"
 	"os"
 	"strings"
+
+	"github.com/mitubaEX/gowk/command"
+	"github.com/mitubaEX/gowk/utils"
 )
 
 func Perform(com command.Command, options *utils.Options) {
@@ -15,7 +17,9 @@ func Perform(com command.Command, options *utils.Options) {
 		line := strings.Split(scanner.Text(), options.Delimiter)
 
 		for _, v := range options.Column {
-			com.Perform(v, line[v])
+			if err := com.Perform(v, line[v]); err != nil {
+				log.Println(err)
+			}
 		}
 	}
 	com.Print()

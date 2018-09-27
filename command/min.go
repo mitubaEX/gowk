@@ -3,9 +3,9 @@ package command
 import (
 	"github.com/mitubaEX/gowk/utils"
 	"math"
-	"log"
 	"fmt"
 	"strings"
+	"errors"
 )
 
 type Min struct {
@@ -17,11 +17,11 @@ func NewMin(options *utils.Options) *Min {
 	return &Min{map[int]float64{}, options}
 }
 
-func (max *Min) Perform(targetIndex int, targetVal string) {
+func (max *Min) Perform(targetIndex int, targetVal string) error {
 	if utils.IsFloat(targetVal) {
 		targetValToFloat, err := utils.StringToFloat(targetVal)
 		if err != nil {
-			panic(err)
+			return err
 		}
 
 		if val, ok := max.maxMap[targetIndex]; ok {
@@ -29,9 +29,10 @@ func (max *Min) Perform(targetIndex int, targetVal string) {
 		} else {
 			max.maxMap[targetIndex] = targetValToFloat
 		}
-	} else {
-		log.Fatalln("string value is not available")
+		return nil
 	}
+
+	return errors.New("string value is not available")
 }
 
 func (max *Min) Print() {

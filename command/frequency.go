@@ -14,7 +14,7 @@ func NewFrequency(options *utils.Options) *Frequency {
 	return &Frequency{map[int]map[string]int{}, options}
 }
 
-func (frequency *Frequency) Perform(targetIndex int, targetVal string) {
+func (frequency *Frequency) Perform(targetIndex int, targetVal string) error {
 	if _, ok := frequency.strMap[targetIndex][targetVal]; ok {
 		frequency.strMap[targetIndex][targetVal] += 1
 	} else {
@@ -26,6 +26,7 @@ func (frequency *Frequency) Perform(targetIndex int, targetVal string) {
 			frequency.strMap[targetIndex] = val
 		}
 	}
+	return nil
 }
 
 func (frequency *Frequency) Print() {
