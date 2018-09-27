@@ -12,16 +12,23 @@ go get github.com/mitubaEX/gowk
 ### help
 
 ```
-❯❯❯ ./gowk -h
+❯❯❯ gowk -h
 
-Usage: ./gowk <command> [<options>] <file>...
-Options
+Usage: gowk <command> [<options>] <file>...
+Commands:
+        sum
+        filter
+        frequency
+        min
+        max
+
+Options:
   -c string
-        target column number
+        target column number (default "0")
   -d string
         delimiter for line (default ",")
   -f string
-        function of filter condition (default "> 0")
+        function of filter condition {required at filter mode} (default "> 0")
 ```
 
 ### Sum
