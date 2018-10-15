@@ -35,6 +35,7 @@ Commands:
 	min
 	max
 	length
+	intersection
 `)
 		fmt.Fprintf(os.Stderr, `
 Options:
@@ -65,6 +66,8 @@ Options:
 		service.Perform(command.NewMin(opt), opt)
 	case "length":
 		service.Perform(command.NewLength(opt), opt)
+	case "intersection":
+		service.Perform(command.NewIntersection(opt), opt)
 	default:
 		help()
 	}

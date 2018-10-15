@@ -22,6 +22,7 @@ Commands:
         min
         max
         length
+        intersection
 
 Options:
   -c string
@@ -95,4 +96,12 @@ Count per line elements by given delimiter.
 ❯❯❯ echo "1,2,3,4\n1,2,3" | go run main.go length
 4
 3
+```
+
+### intersection
+
+```
+❯❯❯ echo "hello,world\nworld,hello\nhello,world" | go run main.go intersection -c 0,1
+hello
+world
 ```
