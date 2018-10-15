@@ -23,6 +23,7 @@ Commands:
         max
         length
         intersection
+        distinct
 
 Options:
   -c string
@@ -104,4 +105,12 @@ Count per line elements by given delimiter.
 ❯❯❯ echo "hello,world\nworld,hello\nhello,world" | go run main.go intersection -c 0,1
 hello
 world
+```
+
+### distinct
+
+```
+❯❯❯ echo "1,world,hello,3\n2,3,world       ,4" | go run main.go distinct -c 1,2
+3
+hello
 ```

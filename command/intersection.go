@@ -25,16 +25,6 @@ func (intersection *Intersection) Perform(line []string) error {
 	return nil
 }
 
-// n がスライスに含まれているか
-func member(n string, xs []string) bool {
-	for _, x := range xs {
-		if n == x {
-			return true
-		}
-	}
-	return false
-}
-
 func (intersection *Intersection) Print() {
 	printMap := map[string]int{}
 	keys := make([]int, 0, len(intersection.intersectionMap))
@@ -43,7 +33,7 @@ func (intersection *Intersection) Print() {
 	}
 
 	for _, v := range intersection.intersectionMap[keys[0]] {
-		if member(v, intersection.intersectionMap[keys[1]]) {
+		if utils.Contains(v, intersection.intersectionMap[keys[1]]) {
 			if _, ok := printMap[v]; !ok {
 				printMap[v] = 1
 			}

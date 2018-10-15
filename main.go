@@ -36,6 +36,7 @@ Commands:
 	max
 	length
 	intersection
+	distinct
 `)
 		fmt.Fprintf(os.Stderr, `
 Options:
@@ -68,6 +69,8 @@ Options:
 		service.Perform(command.NewLength(opt), opt)
 	case "intersection":
 		service.Perform(command.NewIntersection(opt), opt)
+	case "distinct":
+		service.Perform(command.NewDistinct(opt), opt)
 	default:
 		help()
 	}
