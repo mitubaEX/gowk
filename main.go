@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-	"github.com/mitubaEX/gowk/utils"
-	"github.com/mitubaEX/gowk/service"
 	"github.com/mitubaEX/gowk/command"
+	"github.com/mitubaEX/gowk/service"
+	"github.com/mitubaEX/gowk/utils"
+	"os"
 )
 
 func help() {
@@ -29,11 +29,12 @@ func main() {
 Usage: %s <command> [<options>] <file>...`, os.Args[0])
 		fmt.Fprintf(os.Stderr, `
 Commands:
-	sum 
+	sum
 	filter
-	frequency 
+	frequency
 	min
 	max
+	length
 `)
 		fmt.Fprintf(os.Stderr, `
 Options:
@@ -62,6 +63,8 @@ Options:
 		service.Perform(command.NewMax(opt), opt)
 	case "min":
 		service.Perform(command.NewMin(opt), opt)
+	case "length":
+		service.Perform(command.NewLength(opt), opt)
 	default:
 		help()
 	}

@@ -21,6 +21,7 @@ Commands:
         frequency
         min
         max
+        length
 
 Options:
   -c string
@@ -33,6 +34,8 @@ Options:
 
 ### Sum
 
+Get sum in per column.
+
 ```
 ❯❯❯ echo "1,2,3\n2,3,4" | gowk sum
 3
@@ -43,6 +46,8 @@ helloworld,6
 ```
 
 ### filter
+
+Filter given column by given condition.
 
 ```
 ❯❯❯ echo "1,10,hello,3\n2,20,world,4"
@@ -63,6 +68,8 @@ world
 
 ### frequency
 
+Analyze given column word frequency.
+
 ```
 ❯❯❯ echo "1,2,hello,3\n2,3,world,4" | gowk frequency -c 2
 hello: 1
@@ -71,9 +78,21 @@ world: 1
 
 ### min, max
 
+Get per given column min, max.
+
 ```
 ❯❯❯ echo "1,2,hello,3\n2,3,world,4" | gowk max -c 3
 4
 ❯❯❯ echo "1,2,hello,3\n2,3,world,4" | gowk min -c 3
+3
+```
+
+### length
+
+Count per line elements by given delimiter.
+
+```
+❯❯❯ echo "1,2,3,4\n1,2,3" | go run main.go length
+4
 3
 ```
