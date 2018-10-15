@@ -16,10 +16,8 @@ func Perform(com command.Command, options *utils.Options) {
 	for scanner.Scan() {
 		line := strings.Split(scanner.Text(), options.Delimiter)
 
-		for _, v := range options.Column {
-			if err := com.Perform(v, line[v]); err != nil {
-				log.Println(err)
-			}
+		if err := com.Perform(line); err != nil {
+			log.Println(err)
 		}
 	}
 	com.Print()

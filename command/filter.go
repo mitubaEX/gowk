@@ -22,36 +22,40 @@ func eval(expr string) (types.TypeAndValue, error) {
 	return types.Eval(token.NewFileSet(), types.NewPackage("main", "main"), token.NoPos, expr)
 }
 
-func (filter *Filter) Perform(targetIndex int, targetVal string) error {
-	// float val condition
-	if utils.IsFloat(targetVal) {
-		v, err := eval(targetVal + filter.options.Conditions)
-		if err != nil {
-			return err
-		}
+func (filter *Filter) Perform(line []string) error {
+	for _, v := range filter.options.Column {
+		targetIndex := v
+		targetVal := line[v]
 
-		if constant.BoolVal(v.Value) {
-			if val, ok := filter.strMap[targetIndex]; ok {
-				val = append(val, targetVal)
-				filter.strMap[targetIndex] = val
-			} else {
-				filter.strMap[targetIndex] = []string{targetVal}
+		// float val condition
+		if utils.IsFloat(targetVal) {
+			v, err := eval(targetVal + filter.options.Conditions)
+			if err != nil {
+				return err
 			}
-		}
-		return nil
-	}
 
-	// string val condition
-	v, err := eval(`"` + targetVal + `"` + filter.options.Conditions)
-	if err != nil {
-		return err
-	}
-	if constant.BoolVal(v.Value) {
-		if val, ok := filter.strMap[targetIndex]; ok {
-			val = append(val, targetVal)
-			filter.strMap[targetIndex] = val
+			if constant.BoolVal(v.Value) {
+				if val, ok := filter.strMap[targetIndex]; ok {
+					val = append(val, targetVal)
+					filter.strMap[targetIndex] = val
+				} else {
+					filter.strMap[targetIndex] = []string{targetVal}
+				}
+			}
 		} else {
-			filter.strMap[targetIndex] = []string{targetVal}
+			// string val condition
+			v, err := eval(`"` + targetVal + `"` + filter.options.Conditions)
+			if err != nil {
+				return err
+			}
+			if constant.BoolVal(v.Value) {
+				if val, ok := filter.strMap[targetIndex]; ok {
+					val = append(val, targetVal)
+					filter.strMap[targetIndex] = val
+				} else {
+					filter.strMap[targetIndex] = []string{targetVal}
+				}
+			}
 		}
 	}
 	return nil

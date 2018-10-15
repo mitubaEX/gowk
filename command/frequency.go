@@ -14,16 +14,21 @@ func NewFrequency(options *utils.Options) *Frequency {
 	return &Frequency{map[int]map[string]int{}, options}
 }
 
-func (frequency *Frequency) Perform(targetIndex int, targetVal string) error {
-	if _, ok := frequency.strMap[targetIndex][targetVal]; ok {
-		frequency.strMap[targetIndex][targetVal] += 1
-	} else {
-		val := frequency.strMap[targetIndex]
-		if len(val) == 0 {
-			frequency.strMap[targetIndex] = map[string]int{targetVal: 1}
+func (frequency *Frequency) Perform(line []string) error {
+	for _, v := range frequency.options.Column {
+		targetIndex := v
+		targetVal := line[v]
+
+		if _, ok := frequency.strMap[targetIndex][targetVal]; ok {
+			frequency.strMap[targetIndex][targetVal] += 1
 		} else {
-			val[targetVal] = 1
-			frequency.strMap[targetIndex] = val
+			val := frequency.strMap[targetIndex]
+			if len(val) == 0 {
+				frequency.strMap[targetIndex] = map[string]int{targetVal: 1}
+			} else {
+				val[targetVal] = 1
+				frequency.strMap[targetIndex] = val
+			}
 		}
 	}
 	return nil

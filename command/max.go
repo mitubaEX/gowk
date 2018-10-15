@@ -17,22 +17,27 @@ func NewMax(options *utils.Options) *Max {
 	return &Max{map[int]float64{}, options}
 }
 
-func (max *Max) Perform(targetIndex int, targetVal string) error {
-	if utils.IsFloat(targetVal) {
-		targetValToFloat, err := utils.StringToFloat(targetVal)
-		if err != nil {
-			return err
-		}
+func (max *Max) Perform(line []string) error {
+	for _, v := range max.options.Column {
+		targetIndex := v
+		targetVal := line[v]
 
-		if val, ok := max.maxMap[targetIndex]; ok {
-			max.maxMap[targetIndex] = math.Max(val, targetValToFloat)
+		if utils.IsFloat(targetVal) {
+			targetValToFloat, err := utils.StringToFloat(targetVal)
+			if err != nil {
+				return err
+			}
+
+			if val, ok := max.maxMap[targetIndex]; ok {
+				max.maxMap[targetIndex] = math.Max(val, targetValToFloat)
+			} else {
+				max.maxMap[targetIndex] = targetValToFloat
+			}
 		} else {
-			max.maxMap[targetIndex] = targetValToFloat
+			return errors.New("string value is not available")
 		}
-		return nil
 	}
-
-	return errors.New("string value is not available")
+	return nil
 }
 
 func (max *Max) Print() {

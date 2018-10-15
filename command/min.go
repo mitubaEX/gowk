@@ -17,29 +17,34 @@ func NewMin(options *utils.Options) *Min {
 	return &Min{map[int]float64{}, options}
 }
 
-func (max *Min) Perform(targetIndex int, targetVal string) error {
-	if utils.IsFloat(targetVal) {
-		targetValToFloat, err := utils.StringToFloat(targetVal)
-		if err != nil {
-			return err
-		}
+func (min *Min) Perform(line []string) error {
+	for _, v := range min.options.Column {
+		targetIndex := v
+		targetVal := line[v]
 
-		if val, ok := max.maxMap[targetIndex]; ok {
-			max.maxMap[targetIndex] = math.Min(val, targetValToFloat)
-		}
-		max.maxMap[targetIndex] = targetValToFloat
+		if utils.IsFloat(targetVal) {
+			targetValToFloat, err := utils.StringToFloat(targetVal)
+			if err != nil {
+				return err
+			}
 
-		return nil
+			if val, ok := min.maxMap[targetIndex]; ok {
+				min.maxMap[targetIndex] = math.Min(val, targetValToFloat)
+			} else {
+				min.maxMap[targetIndex] = targetValToFloat
+			}
+		} else {
+			return errors.New("string value is not available")
+		}
 	}
-
-	return errors.New("string value is not available")
+	return nil
 }
 
-func (max *Min) Print() {
+func (min *Min) Print() {
 	var printSlice []string
-	for _, k := range max.options.Column {
-		if _, ok := max.maxMap[k]; ok {
-			printSlice = append(printSlice, utils.FloatToString(max.maxMap[k]))
+	for _, k := range min.options.Column {
+		if _, ok := min.maxMap[k]; ok {
+			printSlice = append(printSlice, utils.FloatToString(min.maxMap[k]))
 		}
 	}
 	fmt.Println(strings.Join(printSlice, ","))
