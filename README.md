@@ -1,13 +1,28 @@
 # gowk
-CLI tool of golang similar to awk
+CLI tool of golang for processing csv files.
 
 ## Installation
+
+Use go get command.
+Please run following command.
 
 ```
 go get github.com/mitubaEX/gowk
 ```
 
+## gowk subcommands
+
+- [help](#help)
+- [Sum](#sum)
+- [filter](#filter)
+- [frequency](#frequency)
+- [min, max](#min,max)
+- [length](#length)
+- [intersection](#intersection)
+- [distinct](#distinct)
+
 ## Usage
+
 
 ### help
 
@@ -78,7 +93,7 @@ hello: 1
 world: 1
 ```
 
-### min, max
+### min,max
 
 Get per given column min, max.
 
@@ -94,23 +109,27 @@ Get per given column min, max.
 Count per line elements by given delimiter.
 
 ```
-❯❯❯ echo "1,2,3,4\n1,2,3" | go run main.go length
+❯❯❯ echo "1,2,3,4\n1,2,3" | gowk length
 4
 3
 ```
 
 ### intersection
 
+Get intersection set.
+
 ```
-❯❯❯ echo "hello,world\nworld,hello\nhello,world" | go run main.go intersection -c 0,1
+❯❯❯ echo "hello,world\nworld,hello\nhello,world" | gowk intersection -c 0,1
 hello
 world
 ```
 
 ### distinct
 
+Get distinct set.
+
 ```
-❯❯❯ echo "1,world,hello,3\n2,3,world       ,4" | go run main.go distinct -c 1,2
+❯❯❯ echo "1,world,hello,3\n2,3,world       ,4" | gowk distinct -c 1,2
 3
 hello
 ```
