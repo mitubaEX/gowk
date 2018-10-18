@@ -19,7 +19,7 @@ func main() {
 	fs := flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 	var (
 		c = fs.String("c", "0", "target column number")
-		d = fs.String("d", ",", "delimiter for line")
+		d = fs.String("d", ",", "delimiter for line (delimiter should be rune of golang)")
 		f = fs.String("f", "> 0", "function of filter condition {required at filter mode}")
 	)
 

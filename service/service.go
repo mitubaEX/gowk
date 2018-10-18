@@ -15,7 +15,19 @@ func Perform(com command.Command, options *utils.Options) {
 
 	for scanner.Scan() {
 		line := []string{}
-		for _, v := range strings.Split(scanner.Text(), options.Delimiter) {
+
+		splitFn := func(c rune) bool {
+
+			s := []rune(options.Delimiter)
+
+			var flag = false
+			for _, v := range s {
+				flag = c == v
+			}
+			return flag
+		}
+
+		for _, v := range strings.FieldsFunc(scanner.Text(), splitFn) {
 			line = append(line, strings.TrimSpace(v))
 		}
 
