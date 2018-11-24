@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"github.com/mitubaEX/gowk/utils"
+	"log"
 	"strings"
 )
 
@@ -20,6 +21,9 @@ func (sum *Sum) Perform(line []string) error {
 	for _, v := range sum.options.Column {
 		targetIndex := v
 		targetVal := line[v]
+		if sum.options.IsVerbose {
+			log.Printf("current element is %v\n", targetVal)
+		}
 
 		// float val condition
 		if utils.IsFloat(targetVal) {

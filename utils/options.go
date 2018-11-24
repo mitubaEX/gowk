@@ -9,9 +9,10 @@ type Options struct {
 	Column     []int
 	Delimiter  string
 	Conditions string
+	IsVerbose  bool
 }
 
-func NewOptions(column string, delimiter string, conditions string) *Options {
+func NewOptions(column string, delimiter string, conditions string, isVerbose bool) *Options {
 	var columnSlice []int
 
 	targetColumn := strings.Split(column, ",")
@@ -21,5 +22,5 @@ func NewOptions(column string, delimiter string, conditions string) *Options {
 		columnSlice = append(columnSlice, val)
 	}
 	sort.Ints(columnSlice)
-	return &Options{columnSlice, delimiter, conditions}
+	return &Options{columnSlice, delimiter, conditions, isVerbose}
 }

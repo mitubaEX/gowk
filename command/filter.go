@@ -6,6 +6,7 @@ import (
 	"go/constant"
 	"go/token"
 	"go/types"
+	"log"
 	"strings"
 )
 
@@ -26,6 +27,9 @@ func (filter *Filter) Perform(line []string) error {
 	for _, v := range filter.options.Column {
 		targetIndex := v
 		targetVal := line[v]
+		if filter.options.IsVerbose {
+			log.Printf("current element is %v\n", targetVal)
+		}
 
 		// float val condition
 		if utils.IsFloat(targetVal) {

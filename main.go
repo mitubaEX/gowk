@@ -21,6 +21,7 @@ func main() {
 		c = fs.String("c", "0", "target column number")
 		d = fs.String("d", ",", "delimiter for line (delimiter should be rune of golang)")
 		f = fs.String("f", "> 0", "function of filter condition {required at filter mode}")
+		v = fs.Bool("v", false, "set verbose mode")
 	)
 
 	// -hオプション用文言
@@ -52,7 +53,7 @@ Options:
 
 	fs.Parse(os.Args[2:])
 
-	opt := utils.NewOptions(*c, *d, *f)
+	opt := utils.NewOptions(*c, *d, *f, *v)
 
 	switch arg1 {
 	case "sum":

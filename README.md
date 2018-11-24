@@ -16,7 +16,7 @@ go get github.com/mitubaEX/gowk
 - [Sum](#sum)
 - [filter](#filter)
 - [frequency](#frequency)
-- [min, max](#min,max)
+- [min, max](#minmax)
 - [length](#length)
 - [intersection](#intersection)
 - [distinct](#distinct)
@@ -47,6 +47,7 @@ Options:
         delimiter for line (default ",")
   -f string
         function of filter condition {required at filter mode} (default "> 0")
+  -v    set verbose mode (default false)
 ```
 
 ### Sum

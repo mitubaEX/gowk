@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/mitubaEX/gowk/utils"
+	"log"
 	"math"
 	"strings"
 )
@@ -21,6 +22,9 @@ func (max *Max) Perform(line []string) error {
 	for _, v := range max.options.Column {
 		targetIndex := v
 		targetVal := line[v]
+		if max.options.IsVerbose {
+			log.Printf("current element is %v\n", targetVal)
+		}
 
 		if utils.IsFloat(targetVal) {
 			targetValToFloat, err := utils.StringToFloat(targetVal)

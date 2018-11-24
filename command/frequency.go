@@ -2,6 +2,8 @@ package command
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/mitubaEX/gowk/utils"
 )
 
@@ -18,6 +20,9 @@ func (frequency *Frequency) Perform(line []string) error {
 	for _, v := range frequency.options.Column {
 		targetIndex := v
 		targetVal := line[v]
+		if frequency.options.IsVerbose {
+			log.Printf("current element is %v\n", targetVal)
+		}
 
 		if _, ok := frequency.strMap[targetIndex][targetVal]; ok {
 			frequency.strMap[targetIndex][targetVal] += 1
