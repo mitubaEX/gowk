@@ -52,7 +52,7 @@ Options:
 
 ### Sum
 
-Get sum in per column.
+Get sum in each column.
 
 ```
 ❯❯❯ echo "1,2,3\n2,3,4" | gowk sum
@@ -96,7 +96,7 @@ world: 1
 
 ### min,max
 
-Get per given column min, max.
+Get each given column min, max.
 
 ```
 ❯❯❯ echo "1,2,hello,3\n2,3,world,4" | gowk max -c 3
@@ -107,7 +107,7 @@ Get per given column min, max.
 
 ### length
 
-Count per line elements by given delimiter.
+Count each line elements by given delimiter.
 
 ```
 ❯❯❯ echo "1,2,3,4\n1,2,3" | gowk length
