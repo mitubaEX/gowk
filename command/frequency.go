@@ -42,7 +42,7 @@ func (frequency *Frequency) Perform(line []string) error {
 func (frequency *Frequency) Print() {
 	for _, k := range frequency.options.Column {
 		for key, val := range frequency.strMap[k] {
-			fmt.Printf("%s: %d\n", key, val)
+			fmt.Printf("%s,%d\n", key, val)
 		}
 	}
 }
