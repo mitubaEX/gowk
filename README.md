@@ -134,3 +134,14 @@ Get distinct set.
 3
 hello
 ```
+
+## verbose mode
+
+In verbose mode, gowk print debug message.
+
+```
+❯❯❯ echo "1,2,3\n2,3,4" | gowk sum -v
+2019/02/01 00:05:41 current element is 1
+2019/02/01 00:05:41 current element is 2
+3
+```

@@ -43,6 +43,9 @@ Commands:
 Options:
 `)
 		fs.PrintDefaults()
+		fmt.Fprintf(os.Stderr, `
+Documentation: https://github.com/mitubaEX/gowk
+`)
 	}
 
 	if len(os.Args) <= 1 || os.Args[1] == "-h" {
