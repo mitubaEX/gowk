@@ -3,16 +3,13 @@ package service
 import (
 	"bufio"
 	"log"
-	"os"
 	"strings"
 
 	"github.com/mitubaEX/gowk/command"
 	"github.com/mitubaEX/gowk/utils"
 )
 
-func Perform(com command.Command, options *utils.Options) {
-	scanner := bufio.NewScanner(os.Stdin)
-
+func Perform(com command.Command, options *utils.Options, scanner *bufio.Scanner) {
 	for scanner.Scan() {
 		line := []string{}
 

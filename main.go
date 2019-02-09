@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
+	"os"
+
 	"github.com/mitubaEX/gowk/command"
 	"github.com/mitubaEX/gowk/service"
 	"github.com/mitubaEX/gowk/utils"
-	"os"
 )
 
 func help() {
@@ -56,25 +58,37 @@ Documentation: https://github.com/mitubaEX/gowk
 
 	fs.Parse(os.Args[2:])
 
+	// change input source
+	var scanner *bufio.Scanner
+	if fs.NArg() > 0 {
+		file, err := os.Open(fs.Args()[0])
+		if err != nil {
+			panic(err)
+		}
+		scanner = bufio.NewScanner(file)
+	} else {
+		scanner = bufio.NewScanner(os.Stdin)
+	}
+
 	opt := utils.NewOptions(*c, *d, *f, *v)
 
 	switch arg1 {
 	case "sum":
-		service.Perform(command.NewSum(opt), opt)
+		service.Perform(command.NewSum(opt), opt, scanner)
 	case "filter":
-		service.Perform(command.NewFilter(opt), opt)
+		service.Perform(command.NewFilter(opt), opt, scanner)
 	case "frequency":
-		service.Perform(command.NewFrequency(opt), opt)
+		service.Perform(command.NewFrequency(opt), opt, scanner)
 	case "max":
-		service.Perform(command.NewMax(opt), opt)
+		service.Perform(command.NewMax(opt), opt, scanner)
 	case "min":
-		service.Perform(command.NewMin(opt), opt)
+		service.Perform(command.NewMin(opt), opt, scanner)
 	case "length":
-		service.Perform(command.NewLength(opt), opt)
+		service.Perform(command.NewLength(opt), opt, scanner)
 	case "intersection":
-		service.Perform(command.NewIntersection(opt), opt)
+		service.Perform(command.NewIntersection(opt), opt, scanner)
 	case "distinct":
-		service.Perform(command.NewDistinct(opt), opt)
+		service.Perform(command.NewDistinct(opt), opt, scanner)
 	default:
 		help()
 	}
