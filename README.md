@@ -72,16 +72,16 @@ Filter given column by given condition.
 1,10,hello,3
 2,20,world,4
 
-❯❯❯ echo "1,10,hello,3\n2,20,world,4" | gowk filter -c 1,3 -f '>= 10.0'
-10,0
-20,0
+❯❯❯ echo "1,10,hello,3\n2,20,world,4" | ./gowk filter -c 1 -f '>= 10.0'
+1,10,hello,3
+2,20,world,4
 
-❯❯❯ echo "1,10,hello,3\n2,20,world,4" | gowk filter -c 1,3 -f '>= 10.1'
-20,0
+❯❯❯ echo "1,10,hello,3\n2,20,world,4" | gowk filter -c 1 -f '>= 10.1'
+2,20,world,4
 
 # string
 ❯❯❯ echo "1,2,hello,3\n2,3,world,4" | gowk filter -c 2 -f '> "w"'
-world
+2,3,world,4
 ```
 
 ### frequency
@@ -90,8 +90,8 @@ Analyze given column word frequency.
 
 ```
 ❯❯❯ echo "1,2,hello,3\n2,3,world,4" | gowk frequency -c 2
-hello: 1
-world: 1
+hello,1
+world,1
 ```
 
 ### min,max

@@ -11,12 +11,12 @@ import (
 )
 
 type Filter struct {
-	strMap  map[int][]string
-	options *utils.Options
+	strSlice []string
+	options  *utils.Options
 }
 
 func NewFilter(options *utils.Options) *Filter {
-	return &Filter{map[int][]string{}, options}
+	return &Filter{[]string{}, options}
 }
 
 func eval(expr string) (types.TypeAndValue, error) {
@@ -25,7 +25,6 @@ func eval(expr string) (types.TypeAndValue, error) {
 
 func (filter *Filter) Perform(line []string) error {
 	for _, v := range filter.options.Column {
-		targetIndex := v
 		targetVal := line[v]
 		if filter.options.IsVerbose {
 			log.Printf("current element is %v\n", targetVal)
@@ -39,12 +38,7 @@ func (filter *Filter) Perform(line []string) error {
 			}
 
 			if constant.BoolVal(v.Value) {
-				if val, ok := filter.strMap[targetIndex]; ok {
-					val = append(val, targetVal)
-					filter.strMap[targetIndex] = val
-				} else {
-					filter.strMap[targetIndex] = []string{targetVal}
-				}
+				filter.strSlice = append(filter.strSlice, strings.Join(line, ","))
 			}
 		} else {
 			// string val condition
@@ -53,12 +47,7 @@ func (filter *Filter) Perform(line []string) error {
 				return err
 			}
 			if constant.BoolVal(v.Value) {
-				if val, ok := filter.strMap[targetIndex]; ok {
-					val = append(val, targetVal)
-					filter.strMap[targetIndex] = val
-				} else {
-					filter.strMap[targetIndex] = []string{targetVal}
-				}
+				filter.strSlice = append(filter.strSlice, strings.Join(line, ","))
 			}
 		}
 	}
@@ -66,18 +55,7 @@ func (filter *Filter) Perform(line []string) error {
 }
 
 func (filter *Filter) Print() {
-	var printSlice []string
-
-	for i := 0; i < len(filter.strMap[filter.options.Column[0]]); i++ {
-		printSlice = []string{}
-		for _, k := range filter.options.Column {
-			if i < len(filter.strMap[k]) {
-				printSlice = append(printSlice, filter.strMap[k][i])
-			} else {
-				printSlice = append(printSlice, "0")
-			}
-		}
-		fmt.Println(strings.Join(printSlice, ","))
+	for _, v := range filter.strSlice {
+		fmt.Println(v)
 	}
-
 }
